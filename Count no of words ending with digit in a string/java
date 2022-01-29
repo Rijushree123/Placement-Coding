@@ -1,0 +1,25 @@
+import java.util.*;
+class WordCount 
+{
+    void endingWithdigit(String str)
+    {
+ 
+        int count = 0;
+ 
+        String words[] = str.split(" ");
+ 
+        for (int i = 0; i < words.length; i++) 
+        {
+             if (Character.isDigit(words[i].charAt(words[i].length() - 1)))
+                count++;
+        }
+        System.out.print(count);
+    }
+    public static void main(String args[])
+    {
+        WordCount sol = new WordCount();
+        Scanner sc = new Scanner(System.in);
+        String str = sc.nextLine();
+        sol.endingWithdigit(str);
+    }
+}
