@@ -1,0 +1,74 @@
+class Solution 
+{
+    public boolean checkInclusion(String s1, String s2) 
+    {
+        HashMap<Character,Integer> hash1 = new HashMap<Character,Integer>();
+        HashMap<Character,Integer> hash2 = new HashMap<Character,Integer>();
+        int n1 = s1.length();
+        int n2 = s2.length();
+        if(n1>n2)
+            return false;
+        int left=0, right=0;
+        while(right<n1)
+        {
+            if(hash1.containsKey(s1.charAt(right)))
+                {
+                    hash1.put(s1.charAt(right),hash1.get(s1.charAt(right))+1);
+                }
+                else
+                {
+                    hash1.put(s1.charAt(right),1);
+                }
+            if(hash2.containsKey(s2.charAt(right)))
+                {
+                    hash2.put(s2.charAt(right),hash2.get(s2.charAt(right))+1);
+                }
+                else
+                {
+                    hash2.put(s2.charAt(right),1);
+                }
+                
+            //System.out.println(s1.charAt(right)+"= "+hash1.get(s1.charAt(right))+" "+s2.charAt(right)+hash2.get(s2.charAt(right)));
+            right++;
+        }
+        right--;
+        while(right<n2)
+        {
+            
+            //System.out.println("Boolean= "+(hash1.keySet().equals(hash2.keySet()))+"  "+hash1.keySet()+"=="+hash2.keySet());
+            HashSet<Integer> set1 = new HashSet<>(hash1.values());
+            HashSet<Integer> set2 = new HashSet<>(hash2.values());
+  
+            if(hash1.equals(hash2)) //if(hash1.keySet().equals(hash2.keySet()) && set1.equals(set2))
+            {
+                return true;
+            }
+            ++right;
+            if(right!=n2)
+            {
+                if(hash2.containsKey(s2.charAt(right)))
+                {
+                    hash2.put(s2.charAt(right),hash2.get(s2.charAt(right))+1);
+                }
+                else
+                {
+                    hash2.put(s2.charAt(right),1);
+                }
+                
+                //System.out.println(s2.charAt(right)+"= "+hash2.get(s2.charAt(right)));
+            }
+            //hash2.remove(hash2.get(s2.charAt(left)));
+            
+            
+            if(hash2.get(s2.charAt(left))>1)
+                {
+                    hash2.put(s2.charAt(left),hash2.get(s2.charAt(left))-1);
+                }
+            else
+                hash2.remove(s2.charAt(left),hash2.get(s2.charAt(left)));
+            //System.out.println(s2.charAt(left)+" "+hash2.get(s2.charAt(left)));
+            left++;
+        }
+        return false;
+    }
+}
